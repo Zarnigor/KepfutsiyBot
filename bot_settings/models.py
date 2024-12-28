@@ -1,16 +1,16 @@
 from django.db.models import Model
-from django.db.models.fields import BigIntegerField, CharField, BooleanField, TextField, DateTimeField
+from django.db.models.fields import CharField, BooleanField, TextField, DateTimeField
 from django.utils import timezone
 from django.utils.timezone import now
 
 class BotUser(Model):
-    user_id = BigIntegerField(unique=True)
+    chat_id = CharField(max_length=10, unique=True)
     first_name = CharField(max_length=255, null=True, blank=True)
     username = CharField(max_length=255, null=True, blank=True)
     is_active = BooleanField(default=True)
 
     def __str__(self):
-        return self.username or str(self.user_id)
+        return self.username or str(self.chat_id)
 
 
 class Sentence(Model):

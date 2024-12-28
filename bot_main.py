@@ -27,30 +27,30 @@ dp = Dispatcher()
 async def command_start_handler(message: Message) -> None:
     await message.answer(f"Hello, {html.bold(message.from_user.full_name)}!")
 
-@sync_to_async
-def get_all_sentences():
-    return list(Sentence.objects.all())
-
-@dp.message(Command('send_sentence'))
-async def send_sentence(message: Message):
-    try:
-        result = ""
-        sentences =  await get_all_sentences()
-        for sentence in sentences:
-            if sentence:
-                formatted_message = (
-                    f"Message: {sentence.message}\n"
-                    f"Author: {sentence.author}\n"
-                    f"Created At: {sentence.created_at.strftime('%Y-%m-%d %H:%M:%S')}"
-                )
-                result += '\n\n\n' + formatted_message
-
-        if result != "":
-            await message.answer(result)
-        else:
-            await message.answer("No sentences found in the database.")
-    except Exception as e:
-        await message.answer(f"An error occurred: {e}")
+# @sync_to_async
+# def get_all_sentences():
+#     return list(Sentence.objects.all())
+#
+# @dp.message(Command('send_sentence'))
+# async def send_sentence(message: Message):
+#     try:
+#         result = ""
+#         sentences =  await get_all_sentences()
+#         for sentence in sentences:
+#             if sentence:
+#                 formatted_message = (
+#                     f"Message: {sentence.message}\n"
+#                     f"Author: {sentence.author}\n"
+#                     f"Created At: {sentence.created_at.strftime('%Y-%m-%d %H:%M:%S')}"
+#                 )
+#                 result += '\n\n\n' + formatted_message
+#
+#         if result != "":
+#             await message.answer(result)
+#         else:
+#             await message.answer("No sentences found in the database.")
+#     except Exception as e:
+#         await message.answer(f"An error occurred: {e}")
 
 
 @dp.message()
