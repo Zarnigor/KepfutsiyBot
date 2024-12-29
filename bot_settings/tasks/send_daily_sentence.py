@@ -40,5 +40,3 @@ def send_task():
             "text": text
         }
         requests.post(url, data=payload)
-
-# send_task()
