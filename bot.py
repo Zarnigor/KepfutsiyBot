@@ -5,9 +5,9 @@ import django
 from dotenv import load_dotenv
 
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'root.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
 django.setup()
-from bot_settings.models import BotUser
+from bot_notifier.models import BotUser
 
 load_dotenv()
 
