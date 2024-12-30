@@ -55,6 +55,3 @@ coverage.xml
 *.orig
 *.lock
 docker-compose.override.yml
-
-#migrations
-migrations

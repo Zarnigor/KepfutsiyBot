@@ -1,13 +1,9 @@
 import requests
 import os
-import django
 
 from dotenv import load_dotenv
-
 load_dotenv()
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
-django.setup()
 from bot_notifier.models import BotUser, Sentence
 
 TOKEN = os.getenv("TOKEN")
@@ -18,7 +14,7 @@ def get_all_users():
 
 def send_task():
     users = get_all_users()
-    text = Sentence.objects.order_by('?').first()
+    text = Sentence.objects.order_by('?').first().message
     for user in users:
         chat_id = user.chat_id
 
