@@ -4,7 +4,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: python manage.py runserver 0.0.0.0:8000
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/app
     ports:
@@ -13,6 +15,11 @@ services:
       - db
     env_file:
       - .env
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
 
   q_cluster:
     build:
@@ -23,6 +30,8 @@ services:
       - .:/app
     depends_on:
       - db
+      - redis
+      - django
     env_file:
       - .env
 
@@ -39,9 +48,9 @@ services:
   db:
     image: postgres:14
     environment:
-      POSTGRES_USER: ${{ DB_USER }} 
-      POSTGRES_PASSWORD: ${{ DB_PASSWORD }}
-      POSTGRES_DB: ${{ DB_NAME }}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
