@@ -20,5 +20,5 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          script: nohup python manage.py runserver 0.0.0.0:8000 & \ python manage.py qcluster \ python bot.py
+          script: nohup python manage.py runserver 0.0.0.0:8000 & && nohup python manage.py qcluster & && nohup python bot.py &
           
